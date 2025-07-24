@@ -1,3 +1,9 @@
 git add .
 git commit -m "Update fitur X"
 git push
+git config --global user.name "Nina Ristanti"
+git config --global user.email "ninaristanti26@gmail.com"
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git push -u origin main
