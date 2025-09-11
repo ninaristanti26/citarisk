@@ -47,8 +47,8 @@
     </thead>
     <tbody>
         <?php
-       include("../Database/koneksi.php");
-       include("../getCode/getLaporanKredit.php");
+       include(__DIR__ . '/../Database/koneksi.php');
+       include(__DIR__ . '/../getCode/getLaporanKredit.php');
         $no = 0;
         foreach ($getLaporanKredit as $dataLapKredit) {
          $no++;

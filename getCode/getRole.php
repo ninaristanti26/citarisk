@@ -1,5 +1,6 @@
 <?php 
-include("../Database/koneksi.php");
+include(__DIR__ . '/../Database/koneksi.php');
+
 $query = "SELECT * FROM role";
 $result = $mysqli->query($query);
 if ($result) {

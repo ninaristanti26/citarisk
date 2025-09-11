@@ -1,58 +1,37 @@
 <?php
-// Pastikan tidak ada output sebelum session_start()
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+session_start();
 
-// Cek apakah pengguna sudah login
+// Cek login
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    // Jika belum login, redirect ke halaman login
-    header("Location: index.php");
+    header("Location: /login");
     exit;
 }
-?>
-<body>
-      <!-- loader Start 
-      <div id="loading">
-         <div id="loading-center">
-         </div>
-      </div>-->
-      <!-- loader END -->
-      <!-- Wrapper Start -->
-      <?php 
-   if($_SESSION['id_role'] == 13) { 
-      include("home_ao.php");
 
-      }elseif($_SESSION['id_role'] == 12) { 
-       include("home_analis.php");
-            
-      }elseif($_SESSION['id_role'] == 11) { 
-       include("home_kaspem.php");
-      
-      }elseif($_SESSION['id_role'] == 15) { 
-         include("home_kaspem.php");
-
-      }elseif($_SESSION['id_role'] == 10) { 
-       include("home_pinca.php");
-            
-      }elseif($_SESSION['id_role'] == 14) { 
-       include("home_admin.php");
-      
-      }elseif($_SESSION['id_role'] == 9) { 
-         include("home_admin.php");
-      
-      }elseif($_SESSION['id_role'] == 8) { 
-         include("home_admin.php");
-
-      }elseif($_SESSION['id_role'] == 7) { 
-         include("home_admin.php");
-
-      }elseif($_SESSION['id_role'] == 6) { 
-         include("home_admin.php");
-      
-      }elseif($_SESSION['id_role'] == 5) { 
-         include("home_admin.php");
-      
-      }elseif($_SESSION['id_role'] == 16) { 
-         include("home_adm_kredit.php");}
-?>
+// Routing berdasarkan role
+switch ($_SESSION['id_role']) {
+    case 13:
+        include("home_ao.php");
+        break;
+    case 12:
+        include("home_analis.php");
+        break;
+    case 11:
+    case 15:
+        include("home_kaspem.php");
+        break;
+    case 10:
+        include("home_pinca.php");
+        break;
+    case 16:
+        include("home_adm_kredit.php");
+        break;
+    case 9:
+    case 8:
+    case 7:
+    case 6:
+    case 5:
+        include("home_admin.php");
+        break;
+    default:
+        echo "Role tidak dikenali.";
+}

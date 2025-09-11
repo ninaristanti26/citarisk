@@ -1,5 +1,5 @@
 <?php 
-include("../Database/koneksi.php");
+include(__DIR__ . '/../Database/koneksi.php');
 $query = "SELECT *,
                     TIMESTAMPDIFF(YEAR, data_pokok.tgl_lahir, CURDATE()) AS tahun_umur,
                     TIMESTAMPDIFF(MONTH, data_pokok.tgl_lahir, CURDATE()) % 12 AS bulan_umur,

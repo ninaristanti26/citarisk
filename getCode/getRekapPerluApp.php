@@ -1,5 +1,5 @@
 <?php
-include("../Database/koneksi.php");
+include(__DIR__ . '/../Database/koneksi.php');
 
 $id_pegawai = isset($_SESSION['id_pegawai']) ? (int)$_SESSION['id_pegawai'] : 0;
 

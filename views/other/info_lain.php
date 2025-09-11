@@ -1,7 +1,8 @@
 <?php
-include("../Database/koneksi.php");
-include("../getCode/getInfoLain.php");
-include("../getCode/getDetail.php");
+include(__DIR__ . '/../../Database/koneksi.php');
+include(__DIR__ . '/../../getCode/getInfoLain.php');
+include(__DIR__ . '/../../getCode/getDetail.php');
+
 
 $dataInfoLain = $options[0] ?? [];
 $dataDeb = $getDetail[0] ?? [];

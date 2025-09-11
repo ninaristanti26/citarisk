@@ -1,5 +1,6 @@
 <?php 
-include("../Database/koneksi.php");
+include(__DIR__ . '/../Database/koneksi.php');
+
 
 // Cek apakah sesi tersedia
 if (!isset($_SESSION['id_pegawai'])) {

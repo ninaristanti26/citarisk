@@ -50,8 +50,8 @@ if (isset($_SESSION['id_pegawai'])) {
     </thead>
     <tbody>
         <?php
-        include("../Database/koneksi.php");
-        include("../getCode/getDebitur.php");
+        include(__DIR__ . '/../Database/koneksi.php');
+        include(__DIR__ . '/../getCode/getDebitur.php');
         $no = 1;
         foreach ($options as $dataDeb) {
             $no_ktp_encoded = urlencode($dataDeb['no_ktp']);

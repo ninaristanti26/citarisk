@@ -54,7 +54,7 @@ h4 {
       <div class="row">
          <!-- Total Pengajuan Kredit -->
         <?php 
-include("../getCode/getDebiturRekap.php");
+include(__DIR__ . '/../getCode/getDebiturRekap.php');
 ?>
 <div class="col-sm-6 col-md-6 col-lg-4 mb-4">
     <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
@@ -72,7 +72,7 @@ include("../getCode/getDebiturRekap.php");
 </div>
 <!-- Total Perlu Approval -->
 <?php 
-include("../getCode/getRekapPerluApp.php");
+include(__DIR__ . '/../getCode/getRekapPerluApp.php');
 ?>
 <div class="col-sm-6 col-md-6 col-lg-4 mb-4">
    <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
@@ -91,7 +91,7 @@ include("../getCode/getRekapPerluApp.php");
 
 <!-- Total Ditolak -->
 <?php 
-include("../getCode/getRekapRejected.php");
+include(__DIR__ . '/../getCode/getRekapRejected.php');
 ?>
 <div class="col-sm-6 col-md-6 col-lg-4 mb-4">
    <div class="iq-card iq-card-block iq-card-stretch iq-card-height">

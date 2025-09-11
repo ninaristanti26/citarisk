@@ -1,8 +1,8 @@
 <!-- Header -->
 <?php
-    include("../Database/koneksi.php");
-    include("../getCode/getStatus_kawin.php");
-    include("../getCode/getDetail.php");
+    include(__DIR__ . '/../../Database/koneksi.php');
+    include(__DIR__ . '/../../getCode/getStatus_kawin.php');
+    include(__DIR__ . '/../../getCode/getDetail.php');
 
     $dataStat_kawin = $options[0] ?? [];
     $dataDeb        = $getDetail[0] ?? [];
@@ -57,8 +57,7 @@
             <div class="mt-2">
             <?php
             $no_ktp = $dataDeb['no_ktp'];
-            include("../getCode/getFileSuratNikah.php");
-
+            include(__DIR__ . '/../../getCode/getFileSuratNikah.php');
             if (!empty($getFileSuratNikah)):
                 foreach ($getFileSuratNikah as $fileSuratNikah):
             ?>

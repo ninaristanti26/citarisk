@@ -1,8 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 session_start();
 require_once __DIR__ . '/../Database/koneksi.php';
 
@@ -49,7 +45,7 @@ if ($result->num_rows > 0) {
         $_SESSION['loggedin']    = true;
 
         // Redirect ke halaman home
-        header("Location: ../views/home");
+        header("Location: /home");
         exit;
     } else {
         // Password salah

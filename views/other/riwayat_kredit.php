@@ -1,7 +1,8 @@
 <?php
- include("../Database/koneksi.php");
- include("../getCode/getRiwayat_kredit.php");
- include("../getCode/getRole.php");
+include(__DIR__ . '/../../Database/koneksi.php');
+include(__DIR__ . '/../../getCode/getRiwayat_kredit.php');
+include(__DIR__ . '/../../getCode/getRole.php');
+
  $id_role_login = $_SESSION['id_role'];
 //$id_role_data = $getRole['id_pegawai'] ?? null;
 

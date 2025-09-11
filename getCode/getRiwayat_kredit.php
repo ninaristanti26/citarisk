@@ -1,5 +1,5 @@
 <?php 
-include("../Database/koneksi.php");
+include(__DIR__ . '/../Database/koneksi.php');
 $no_ktp = $_GET['no_ktp'];
 $query = "SELECT riwayat_kredit.*, data_pokok.nama_debitur
           FROM riwayat_kredit

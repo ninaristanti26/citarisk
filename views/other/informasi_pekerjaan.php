@@ -1,7 +1,7 @@
 <?php
-    include("../Database/koneksi.php");
-    include("../getCode/getPekerjaan.php");
-    include("../getCode/getDetail.php");
+    include(__DIR__ . '/../../Database/koneksi.php');
+    include(__DIR__ . '/../../getCode/getPekerjaan.php');
+    include(__DIR__ . '/../../getCode/getDetail.php');
 
     $dataPekerjaan = isset($getPekerjaan[0]) ? $getPekerjaan[0] : [];
     $dataDeb       = $getDetail[0] ?? [];
