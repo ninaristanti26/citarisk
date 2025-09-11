@@ -27,9 +27,10 @@ if (isset($_SESSION['id_pegawai'])) {
                <h5 class="mb-0 text-white">📋 Data Debitur</h5>
                <!-- Tombol trigger modal -->
                <?php if (isset($_SESSION['id_role']) && $_SESSION['id_role'] == 13): ?>
-               <button type="button" class="btn btn-light btn-sm text-primary" data-toggle="modal" data-target="#modalTambahDebitur">
-                  + Tambah Data
-               </button>
+               <button type="button" class="btn btn-light btn-sm text-primary" id="btnTambahDebitur">
+   + Tambah Data
+</button>
+
                <?php endif; ?>
             </div>
 
@@ -97,6 +98,17 @@ if (isset($_SESSION['id_pegawai'])) {
 
       </div>
    </div>
-</div>
+</div><?php include "other/footer.php"; ?>
+<script>
+$(document).ready(function() {
+  $('#btnTambahDebitur').click(function() {
+    $('#modalTambahDebitur').modal({
+      backdrop: 'static', // klik di luar modal gak nutup modal
+      keyboard: false    // ESC gak nutup modal
+    });
+  });
+});
+</script>
 
-<?php include "other/footer.php"; ?>
+
+

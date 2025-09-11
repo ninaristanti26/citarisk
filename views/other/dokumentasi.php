@@ -1,7 +1,7 @@
 <?php
-include("../Database/koneksi.php");
-include("../getCode/getLegal.php");
-include("../getCode/getDetail.php");
+include(__DIR__ . '/../../Database/koneksi.php');
+include(__DIR__ . '/../../getCode/getLegal.php');
+include(__DIR__ . '/../../getCode/getDetail.php');
 
 $legal   = $getLegal[0] ?? [];
 $dataDeb = $getDetail[0] ?? [];
@@ -263,7 +263,7 @@ if (isset($legal['kelengkapan_legal'])) {
     </tbody>
 </table>
 <?php 
-include "add/add_dokumentasi.php"; 
+include(__DIR__ . '/../add/add_dokumentasi.php');
 ?>
 <!-- LEGAL OPINION -->
 

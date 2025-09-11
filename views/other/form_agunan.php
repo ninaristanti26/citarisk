@@ -1,8 +1,8 @@
 <?php
-include("../Database/koneksi.php");
-include("../getCode/getBank_lain.php");
-include("../getCode/getDetail.php");
-include("../getCode/getFileSK.php");
+include(__DIR__ . '/../../Database/koneksi.php');
+include(__DIR__ . '/../../getCode/getBank_lain.php');
+include(__DIR__ . '/../../getCode/getDetail.php');
+include(__DIR__ . '/../../getCode/getFileSK.php');
 
 $dataDeb = $getDetail[0] ?? [];
 

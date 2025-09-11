@@ -5,7 +5,7 @@
     <div class="col-lg-12">
         <div class="form-group">
         <label class="form-control-label" for="input-first-name">No. KTP</label>
-            <input type="text" class="form-control" name="no_ktp" id="no_ktp">
+            <input type="text" class="form-control" name="no_ktp" id="no_ktp" pattern="\d{16}" title="No. KTP harus 16 digit angka" required>
 		</div>
     </div>
     <div class="col-lg-12">
@@ -92,3 +92,37 @@
         </div>
     </div>	
 </form>
+<script>
+function valid() {
+    var form = document.forms['form1'];
+    
+    var no_ktp = form['no_ktp'].value.trim();
+    var regex_ktp = /^\d{16}$/;
+    if (!regex_ktp.test(no_ktp)) {
+        alert('No. KTP harus terdiri dari 16 digit angka.');
+        form['no_ktp'].focus();
+        return false;
+    }
+
+    for (var i = 0; i < form.elements.length; i++) {
+        var el = form.elements[i];
+        
+        if (el.type === 'hidden' || el.type === 'submit' || el.type === 'reset' || el.disabled) {
+            continue;
+        }
+
+        if ((el.tagName.toLowerCase() === 'input' || el.tagName.toLowerCase() === 'select' || el.tagName.toLowerCase() === 'textarea') 
+            && el.hasAttribute('name')) {
+            var val = el.value.trim();
+            if (val === '') {
+                alert('Field "' + (el.previousElementSibling ? el.previousElementSibling.innerText : el.name) + '" tidak boleh kosong.');
+                el.focus();
+                return false;
+            }
+        }
+    }
+
+    return true; 
+}
+</script>
+

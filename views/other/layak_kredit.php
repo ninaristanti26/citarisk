@@ -1,11 +1,11 @@
 <?php
-include("../Database/koneksi.php");
-include("../getCode/getKarakter.php");
-include("../getCode/getDetail.php");
-include("../getCode/getKemampuan.php");
-include("../getCode/getAgunan.php");
-include("../getCode/getKondisi_ekonomi.php");
-include("../getCode/getLegal.php");
+include(__DIR__ . '/../../Database/koneksi.php');
+include(__DIR__ . '/../../getCode/getKarakter.php');
+include(__DIR__ . '/../../getCode/getDetail.php');
+include(__DIR__ . '/../../getCode/getKemampuan.php');
+include(__DIR__ . '/../../getCode/getAgunan.php');
+include(__DIR__ . '/../../getCode/getKondisi_ekonomi.php');
+include(__DIR__ . '/../../getCode/getLegal.php');
 
 $dataKarakter  = $getKarakter[0] ?? [];
 $dataKemampuan = $getKemampuan[0] ?? [];
