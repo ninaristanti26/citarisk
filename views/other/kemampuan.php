@@ -1,7 +1,7 @@
 <?php
-include("../Database/koneksi.php");
-include("../getCode/getKemampuan.php");
-include("../getCode/getDetail.php");
+include(__DIR__ . '/../../Database/koneksi.php');
+include(__DIR__ . '/../../getCode/getKemampuan.php');
+include(__DIR__ . '/../../getCode/getDetail.php');
 
 $dataKemampuan = $getKemampuan[0] ?? [];
 $dataDeb       = $getDetail[0] ?? [];
@@ -168,4 +168,4 @@ $all_empty = empty($pengendalian_pembayaran) &&
         </tr>
     </tbody>
 </table>
-<?php include "add/add_kemampuan.php"; ?>
+<?php include(__DIR__ . '/../add/add_kemampuan.php'); ?>

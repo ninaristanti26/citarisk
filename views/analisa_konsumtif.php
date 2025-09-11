@@ -9,8 +9,9 @@
             <div class="card-body">
                <div class="table-responsive">
                <?php
-                        include("../Database/koneksi.php");
-                        include("../getCode/getDetail.php");
+                        include(__DIR__ . '/../Database/koneksi.php');
+                        include(__DIR__ . '/../getCode/getDetail.php');
+
                         $no = 1;
                         foreach ($getDetail as $dataDeb) {
                         $no_ktp_encoded = urlencode($dataDeb['no_ktp']);
@@ -34,7 +35,7 @@
                     <div class="mt-2">
                     <?php
                         $_GET['no_ktp'] = $dataDeb['no_ktp']; // agar getFile.php bisa membaca no_ktp
-                        include("../getCode/getFile.php");
+                        include(__DIR__ . '/../getCode/getFile.php');
                             if (!empty($getFile)):
                             foreach ($getFile as $file):
                     ?>

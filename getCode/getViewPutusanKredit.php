@@ -1,5 +1,5 @@
 <?php 
-include("../Database/koneksi.php");
+include(__DIR__ . '/../Database/koneksi.php');
 
 $no_ktp     = $_GET['no_ktp'];
 $id_riwayat = $_GET['id_riwayat'];

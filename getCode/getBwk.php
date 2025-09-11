@@ -1,5 +1,5 @@
 <?php
-include("../Database/koneksi.php");
+include(__DIR__ . '/../Database/koneksi.php');
 function getBwkDataByPegawai($mysqli, $id_pegawai) {
     $stmt = $mysqli->prepare("
         SELECT *

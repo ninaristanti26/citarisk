@@ -1,5 +1,5 @@
 <?php 
-include("../Database/koneksi.php");
+include(__DIR__ . '/../Database/koneksi.php');
 $query = "SELECT * 
                   FROM riwayat_kredit, kondisi_ekonomi
                   WHERE riwayat_kredit.id_riwayat=kondisi_ekonomi.id_riwayat 

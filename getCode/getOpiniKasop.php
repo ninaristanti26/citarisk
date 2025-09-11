@@ -1,5 +1,5 @@
 <?php 
-include("../Database/koneksi.php");
+include(__DIR__ . '/../Database/koneksi.php');
 
 $id_riwayat = isset($_GET['id_riwayat']) ? $_GET['id_riwayat'] : '';
 

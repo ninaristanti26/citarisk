@@ -1,5 +1,5 @@
 <?php 
-include("../Database/koneksi.php");
+include(__DIR__ . '/../Database/koneksi.php');
 if (isset($_SESSION['id_role']) && ($_SESSION['id_role'] == 10)) {
 
     $query = "SELECT users.*, cabang.*

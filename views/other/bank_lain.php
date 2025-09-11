@@ -1,8 +1,8 @@
 <?php
-include("../Database/koneksi.php");
-include("../getCode/getBank_lain.php");
-include("../getCode/getDetail.php");
-include("../getCode/getRiwayat_kredit.php");
+include(__DIR__ . '/../../Database/koneksi.php');
+include(__DIR__ . '/../../getCode/getBank_lain.php');
+include(__DIR__ . '/../../getCode/getDetail.php');
+include(__DIR__ . '/../../getCode/getRiwayat_kredit.php');
 
 $dataDeb = $getDetail[0] ?? [];
 
@@ -62,7 +62,7 @@ $kode_cabang_data  = $dataDeb['kode_cabang'] ?? null;
         <?php
             $no_ktp     = $dataDeb['no_ktp'];
             $id_riwayat = $dataRiwayat['id_riwayat'];
-            include("../getCode/getFileIdeb.php");
+            include(__DIR__ . '/../../getCode/getFileIdeb.php');
             if (!empty($getFileIdeb)):
                 foreach ($getFileIdeb as $fileIdeb):
             ?>

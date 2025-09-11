@@ -1,5 +1,5 @@
 <?php
-include("../Database/koneksi.php");
+include(__DIR__ . '/../Database/koneksi.php');
 
 $query = "
     SELECT COUNT(riwayat_kredit.id_riwayat) AS total_riwayat_pusat

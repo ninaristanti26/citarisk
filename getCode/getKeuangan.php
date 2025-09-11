@@ -1,5 +1,5 @@
 <?php 
-include("../Database/koneksi.php");
+include(__DIR__ . '/../Database/koneksi.php');
 $query = "SELECT data_keuangan.*, riwayat_kredit.*  
                   FROM data_keuangan
                   INNER JOIN riwayat_kredit ON riwayat_kredit.id_riwayat = data_keuangan.id_riwayat

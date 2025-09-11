@@ -1,6 +1,6 @@
 <?php
-    include("../Database/koneksi.php");
-    include("../getCode/getRiwayat_kredit.php");
+    include(__DIR__ . '/../../Database/koneksi.php');
+    include(__DIR__ . '/../../getCode/getRiwayat_kredit.php');
     
     $dataRiwayat = isset($getRiwayat_kredit[0]) ? $getRiwayat_kredit[0] : [];
   

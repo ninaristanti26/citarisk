@@ -1,5 +1,5 @@
 <?php 
-include("../Database/koneksi.php");
+include(__DIR__ . '/../Database/koneksi.php');
 
 $no_ktp     = $mysqli->real_escape_string($_GET['no_ktp']);
 $id_riwayat = $mysqli->real_escape_string($_GET['id_riwayat']); 

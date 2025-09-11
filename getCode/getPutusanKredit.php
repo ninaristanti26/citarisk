@@ -1,5 +1,5 @@
 <?php
-include("../Database/koneksi.php");
+include(__DIR__ . '/../Database/koneksi.php');
 
 $sql_pinca = $mysqli->prepare("SELECT status, plafon_rekom_pinca, jw_rekom_pinca FROM putusan_pinca WHERE id_riwayat = ?");
 $sql_pinca->bind_param("s", $id_riwayat);

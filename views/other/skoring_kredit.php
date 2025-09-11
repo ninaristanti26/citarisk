@@ -1,7 +1,7 @@
 <?php
-include("../Database/koneksi.php");
-include("../getCode/getKarakter.php");
-include("../getCode/getDetail.php");
+include(__DIR__ . '/../../Database/koneksi.php');
+include(__DIR__ . '/../../getCode/getKarakter.php');
+include(__DIR__ . '/../../getCode/getDetail.php');
 
 $dataKarakter = $getKarakter[0] ?? [];
 $id_role_login     = $_SESSION['id_role'];
@@ -292,7 +292,7 @@ $rata_nilai   = $jumlah_nilai/6;
         </tr>
     </tbody>
 </table>
-<?php include "add/add_karakter.php"; ?>
+<?php include(__DIR__ . '/../add/add_karakter.php'); ?>
 <?php
 // Tambahan modul terkait
 include("kemampuan.php");

@@ -1,5 +1,5 @@
 <?php 
-include("../Database/koneksi.php");
+include(__DIR__ . '/../Database/koneksi.php');
 
 if (!isset($_SESSION['kode_cabang'])) {
     die("Unit Kerja tidak ditemukan di sesi.");

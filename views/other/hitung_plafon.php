@@ -4,12 +4,12 @@
 
 <div class="table-responsive">
     <?php
-    include("../Database/koneksi.php");
-    include("../getCode/getKeuangan.php");
-    include("../getCode/getBank_lain.php");
-    include("../getCode/getPekerjaan.php");
-    include("../getCode/getRiwayat_kredit.php");
-
+    include(__DIR__ . '/../../Database/koneksi.php');
+    include(__DIR__ . '/../../getCode/getKeuangan.php');
+    include(__DIR__ . '/../../getCode/getBank_lain.php');
+    include(__DIR__ . '/../../getCode/getPekerjaan.php');
+    include(__DIR__ . '/../../getCode/getRiwayat_kredit.php');
+    
     $dataKeuangan  = isset($options[0]) ? $options[0] : [];
     $dataBankLain  = isset($getBankLain[0]) ? $getBankLain[0] : [];
     $dataPekerjaan = isset($getPekerjaan[0]) ? $getPekerjaan[0] : [];

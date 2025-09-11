@@ -1,7 +1,7 @@
 <?php
-include("../Database/koneksi.php");
-include("../getCode/getAgunan.php");
-include("../getCode/getDetail.php");
+include(__DIR__ . '/../../Database/koneksi.php');
+include(__DIR__ . '/../../getCode/getAgunan.php');
+include(__DIR__ . '/../../getCode/getDetail.php');
 
 $agunan  = $getAgunan[0] ?? [];
 $dataDeb = $getDetail[0] ?? [];
@@ -215,4 +215,4 @@ $all_empty = empty($mou) &&
         </tr>
     </tbody>
 </table>
-<?php include "add/add_agunan.php"; ?>
+<?php include(__DIR__ . '/../add/add_agunan.php'); ?>

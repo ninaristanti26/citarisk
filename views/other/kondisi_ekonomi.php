@@ -1,7 +1,7 @@
 <?php
-include("../Database/koneksi.php");
-include("../getCode/getKondisi_ekonomi.php");
-include("../getCode/getDetail.php");
+include(__DIR__ . '/../../Database/koneksi.php');
+include(__DIR__ . '/../../getCode/getKondisi_ekonomi.php');
+include(__DIR__ . '/../../getCode/getDetail.php');
 
 $ekonomi = $getKondisi_ekonomi[0] ?? [];
 $dataDeb = $getDetail[0] ?? [];
@@ -155,4 +155,4 @@ $all_empty = empty($pengaruh_eksternal) &&
         </tr>
     </tbody>
 </table>
-<?php include "add/add_kondisi_ekonomi.php"; ?>
+<?php include(__DIR__ . '/../add/add_kondisi_ekonomi.php'); ?>

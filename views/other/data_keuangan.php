@@ -1,9 +1,9 @@
 <?php
-    include("../Database/koneksi.php");
-    include("../getCode/getKeuangan.php");
-    include("../getCode/getBank_lain.php");
-    include("../getCode/getDetail.php");
-
+    include(__DIR__ . '/../../Database/koneksi.php');
+    include(__DIR__ . '/../../getCode/getKeuangan.php');
+    include(__DIR__ . '/../../getCode/getBank_lain.php');
+    include(__DIR__ . '/../../getCode/getDetail.php');
+    
     $dataKeuangan = $options[0] ?? [];
     $dataBankLain = $getBankLain[0] ?? [];
     $dataDeb      = $getDetail[0] ?? [];
@@ -70,7 +70,7 @@
 </div>
 
 <!-- FORM TAMBAH DATA -->
-<?php include "add/add_keuangan.php"; ?>
+<?php include(__DIR__ . '/../add/add_keuangan.php'); ?>
 
 <!-- Pindahkan script ke sini agar dikenali -->
 <script>
