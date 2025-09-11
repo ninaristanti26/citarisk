@@ -1,4 +1,9 @@
 <?php include "other/header.php"; ?>
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
 <style>
 .iq-card {
    background: linear-gradient(135deg, #ffffff, #f7f9fc);

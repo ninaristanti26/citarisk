@@ -2,8 +2,8 @@
     <div class="iq-sidebar">
         <div class="iq-navbar-logo d-flex justify-content-between">
             <a href="index.html" class="header-logo">
-               <img src="../layout/images/logo.png" class="img-fluid rounded" alt="">
-               <span>LENS</span>
+              <img src="../layout/images/2.png" class="img-fluid rounded" alt="">
+               <span>L E N S</span>
                </a>
                <div class="iq-menu-bt align-self-center">
                   <div class="wrapper-menu">
@@ -24,18 +24,30 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#tables" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-table-line iq-arrow-left"></i><span>Data Based</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                        <ul id="tables" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <li><a href="data_debitur"><i class="ri-table-line"></i>Data Debitur</a></li>
-                           <li><a href="data_ao"><i class="ri-database-line"></i>Data Petugas Marketing</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#charts" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-pie-chart-box-line iq-arrow-left"></i><span>Reports</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                        <ul id="charts" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                        <li><a href="chart-apex.html"><i class="ri-folder-chart-2-line"></i>Apex Chart</a></li>
+                        <a href="#charts_debitur" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-pie-chart-box-line iq-arrow-left"></i><span>Data Debitur</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                        <ul id="charts_debitur" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                        <li><a href="data_debitur?kode_cabang=<?php echo $_SESSION['kode_cabang']; ?>"><i class="ri-folder-chart-2-line"></i>Data Seluruh Debitur</a></li>
+                        <li><a href="data_ao_cabang?kode_cabang=<?php echo $_SESSION['kode_cabang']; ?>"><i class="ri-folder-chart-2-line"></i>Data Petugas Marketing</a></li>
+                        <li><a href="debitur_perlu_approval_kaspem?kode_cabang=<?php echo $_SESSION['kode_cabang']; ?>"><i class="ri-folder-chart-2-line"></i>Data Debitur Perlu Approval</a></li>
                         </ul>
                      </li>
+                   <li>
+                        <a href="#charts_reports" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-pie-chart-box-line iq-arrow-left"></i><span>Reports</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                        <ul id="charts_reports" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                        <li><a href="laporan_kredit_cabang"><i class="ri-folder-chart-2-line"></i>Laporan Kredit</a></li>
+                        <li><a href="laporan_kredit_approved_cabang"><i class="ri-folder-chart-2-line"></i>Laporan Kredit Approved</a></li>
+                        <li><a href="laporan_kredit_rejected_cabang"><i class="ri-folder-chart-2-line"></i>Laporan Kredit Rejected</a></li>
+                        <li><a href="laporan_pencapaian_cabang"><i class="ri-folder-chart-2-line"></i>Laporan Pencapaian</a></li>
+                        </ul>
+                     </li>
+                     <li class="">
+                        <a href="adm" class="iq-waves-effect" >
+                            <span class="ripple rippleEffect"></span>
+                                <i class="las ri-table-line iq-arrow-left"></i>
+                                    <span>Parameter Administrasi</span>
+                                    <i class="ri-arrow-right-s-line iq-arrow-right"></i>
+                        </a>
+                    </li>
                   </ul>
                </nav>
                <div class="p-3"></div>

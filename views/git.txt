@@ -1,9 +1,14 @@
-git add .
-git commit -m "Update fitur X"
-git push
-git config --global user.name "Nina Ristanti"
-git config --global user.email "ninaristanti26@gmail.com"
+cd C:\xampp\htdocs\lens
+
+git init
+git config user.name "Nina Ristanti"
+git config user.email "ninaristanti26@gmail.com"
+
 git add .
 git commit -m "Initial commit"
+
 git branch -M main
+
+git remote add origin https://github.com/ninaristanti26/lens.git
+git pull origin main --allow-unrelated-histories
 git push -u origin main

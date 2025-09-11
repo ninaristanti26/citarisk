@@ -40,119 +40,174 @@ h4 {
 }
 
 </style>
-
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../cal/css/style.css">
 <!-- Page Content -->
 <div id="content-page" class="content-page">
    <div class="container-fluid">
       <div class="row">
-
-         <!-- Total Petugas Marketing -->
-         <div class="col-sm-6 col-md-6 col-lg-3 mb-4">
-            <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
-               <div class="iq-card-body iq-box-relative">
-                  <div class="iq-box-absolute icon iq-icon-box rounded-circle iq-bg-primary">
-                     <i class="ri-focus-2-line text-white"></i>
-                  </div>
-                  <p class="text-secondary">Total Petugas Marketing</p>
-                  <div class="d-flex align-items-center justify-content-between">
-                     <h4>18</h4>
-                     <span class="text-primary"><b><i class="ri-arrow-up-fill"></i></b></span>
-                  </div>
-               </div>
-            </div>
-         </div>
-
          <!-- Total Pengajuan Kredit -->
-         <div class="col-sm-6 col-md-6 col-lg-3 mb-4">
-            <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
-               <div class="iq-card-body iq-box-relative">
-                  <div class="iq-box-absolute icon iq-icon-box rounded-circle iq-bg-danger">
-                     <i class="ri-pantone-line text-white"></i>
-                  </div>
-                  <p class="text-secondary">Total Pengajuan Kredit</p>
-                  <div class="d-flex align-items-center justify-content-between">
-                     <h4>19</h4>
-                     <span class="text-danger"><b><i class="ri-arrow-down-fill"></i></b></span>
-                  </div>
-               </div>
+<?php 
+include("../getCode/getDebiturRekapCabang.php");
+?>
+<div class="col-sm-6 col-md-6 col-lg-4 mb-4">
+    <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+        <div class="iq-card-body iq-box-relative">
+            <div class="iq-box-absolute icon iq-icon-box rounded-circle iq-bg-danger">
+                <i class="ri-pantone-line text-white"></i>
+            </div>
+            <p class="text-secondary">Total Pengajuan Kredit</p>
+            <div class="d-flex align-items-center justify-content-between">
+                <h4><?php echo htmlspecialchars($total_riwayat_cabang); ?></h4>
+                <span class="text-danger"><b><i class="ri-arrow-down-fill"></i></b></span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Total Perlu Approval -->
+<?php 
+include("../getCode/getRekapPerluAppCabang.php");
+?>
+<div class="col-sm-6 col-md-6 col-lg-4 mb-4">
+   <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+      <div class="iq-card-body iq-box-relative">
+         <div class="iq-box-absolute icon iq-icon-box rounded-circle iq-bg-success">
+            <i class="ri-database-2-line text-white"></i>
+         </div>
+            <p class="text-secondary">Pengajuan Kredit Perlu Approval</p>
+            <div class="d-flex align-items-center justify-content-between">
+               <h4><?php echo htmlspecialchars($total_pending_semua); ?></h4>
+               <span class="text-success"><b><i class="ri-arrow-up-fill"></i></b></span>
             </div>
          </div>
+      </div>
+   </div>
 
-         <!-- Total Perlu Approval -->
-         <div class="col-sm-6 col-md-6 col-lg-3 mb-4">
-            <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
-               <div class="iq-card-body iq-box-relative">
-                  <div class="iq-box-absolute icon iq-icon-box rounded-circle iq-bg-success">
-                     <i class="ri-database-2-line text-white"></i>
-                  </div>
-                  <p class="text-secondary">Pengajuan Kredit Perlu Approval</p>
-                  <div class="d-flex align-items-center justify-content-between">
-                     <h4>5</h4>
-                     <span class="text-success"><b><i class="ri-arrow-up-fill"></i></b></span>
-                  </div>
-               </div>
-            </div>
+<!-- Total Ditolak -->
+<?php 
+include("../getCode/getRekapRejectedCabang.php");
+?>
+<div class="col-sm-6 col-md-6 col-lg-4 mb-4">
+   <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+      <div class="iq-card-body iq-box-relative">
+         <div class="iq-box-absolute icon iq-icon-box rounded-circle iq-bg-warning">
+            <i class="ri-pie-chart-2-line text-white"></i>
          </div>
-
-         <!-- Total Ditolak -->
-         <div class="col-sm-6 col-md-6 col-lg-3 mb-4">
-            <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
-               <div class="iq-card-body iq-box-relative">
-                  <div class="iq-box-absolute icon iq-icon-box rounded-circle iq-bg-warning">
-                     <i class="ri-pie-chart-2-line text-white"></i>
-                  </div>
-                  <p class="text-secondary">Pengajuan Kredit Ditolak</p>
-                  <div class="d-flex align-items-center justify-content-between">
-                     <h4>0</h4>
-                     <span class="text-warning"><b><i class="ri-arrow-up-fill"></i></b></span>
-                  </div>
-               </div>
-            </div>
+         <p class="text-secondary">Pengajuan Kredit Ditolak</p>
+         <div class="d-flex align-items-center justify-content-between">
+            <h4><?php echo htmlspecialchars($total_rejected_semua); ?></h4>
+            <span class="text-warning"><b><i class="ri-arrow-up-fill"></i></b></span>
          </div>
-         <div class="col-lg-12">
-            <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
-               <div class="iq-card-header d-flex justify-content-between">
-                  <div class="iq-header-title">
-                     <h4 class="card-title">Pencapaian Target</h4>
-                  </div>
-               </div>
-               <div class="iq-card-body row m-0 align-items-center pb-0">
-                  <div class="col-md-8">
-                     <div id="iq-income-chart"></div>
-                  </div>
-                  <div class="col-md-4">
-                     <div class="chart-data-block">
-                        <h4><b>Target</b></h4>
-                        <h2><b>15000000</b></h2>
-                        <p></p>
-                           <div class="chart-box d-flex align-items-center justify-content-between mt-5 mb-5">
-                              <div id="iq-chart-boxleft"></div>
-                              <div id="iq-chart-boxright"></div>
-                           </div>
-                           <div class="mt-3 pr-3">
-                              <div class="d-flex align-items-center justify-content-between">
-                                 <div class="d-flex align-items-center">
-                                    <span class="bg-primary p-1 rounded mr-2"></span>
-                                    <p class="mb-0">Approve</p>
-                                 </div>
-                                 <h6><b>78%</b></h6>
-                              </div>
-                              <div class="d-flex align-items-center justify-content-between">
-                                 <div class="d-flex align-items-center">
-                                    <span class="bg-danger p-1 rounded mr-2"></span>
-                                    <p class="mb-0">Rejected</p>
-                                 </div>
-                                 <h6><b>12%</b></h6>
-                              </div>
-                              </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
+      </div>
+   </div>
+</div>
+<div class="col-md-12">
+   <section class="ftco-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="elegant-calencar d-md-flex">
+						<div class="wrap-header d-flex align-items-center img" style="background-image: url(../cal/images/bg.jpg);">
+				      <p id="reset">Today</p>
+			        <div id="header" class="p-0">
+						<div class="head-info">
+		            	<div class="head-month"></div>
+		                <div class="head-day"></div>
+		            </div>
+		            <!-- <div class="next-button d-flex align-items-center justify-content-center"><i class="fa fa-chevron-right"></i></div> -->
+			        </div>	
+			      </div>
+			      <div class="calendar-wrap">
+			      	<div class="w-100 button-wrap">
+				      	<div class="pre-button d-flex align-items-center justify-content-center"><i class="fa fa-chevron-left"></i></div>
+				      	<div class="next-button d-flex align-items-center justify-content-center"><i class="fa fa-chevron-right"></i></div>
+			      	</div>
+			        <table id="calendar">
+		            <thead>
+		                <tr>
+	                    <th>Sun</th>
+	                    <th>Mon</th>
+	                    <th>Tue</th>
+	                    <th>Wed</th>
+	                    <th>Thu</th>
+	                    <th>Fri</th>
+	                    <th>Sat</th>
+		                </tr>
+		            </thead>
+		            <tbody>
+	                <tr>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                </tr>
+	                <tr>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                </tr>
+	                <tr>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                </tr>
+	                <tr>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                </tr>
+	                <tr>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                </tr>
+	                <tr>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                  <td></td>
+	                </tr>
+		            </tbody>
+			        </table>
+			      </div>
+			    </div>
+				</div>
+			</div>
+		</div>
+	</section> 
+</div>
+</div>
+</div>
+</div>
       </div>
    </div>
 </div>
 <!-- Page Content END -->
-
+<script src="../cal/js/jquery.min.js"></script>
+  <script src="../cal/js/popper.js"></script>
+  <script src="../cal/js/bootstrap.min.js"></script>
+  <script src="../cal/js/main.js"></script>
 <?php include "other/footer.php"; ?>

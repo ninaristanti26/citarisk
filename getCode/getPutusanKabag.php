@@ -10,14 +10,17 @@ if (!$id_riwayat) {
 $stmt = $mysqli->prepare("
     SELECT *
     FROM users
-    JOIN data_pokok ON users.id_pegawai = data_pokok.id_pegawai
-    JOIN riwayat_kredit ON data_pokok.no_ktp = riwayat_kredit.no_ktp
-    JOIN putusan_kabag ON 
-        putusan_kabag.no_ktp = data_pokok.no_ktp AND 
-        putusan_kabag.id_riwayat = riwayat_kredit.id_riwayat AND
-        putusan_kabag.id_pegawai = users.id_pegawai
+    JOIN data_pokok 
+        ON users.id_pegawai COLLATE utf8mb4_unicode_ci = data_pokok.id_pegawai COLLATE utf8mb4_unicode_ci
+    JOIN riwayat_kredit 
+        ON data_pokok.no_ktp COLLATE utf8mb4_unicode_ci = riwayat_kredit.no_ktp COLLATE utf8mb4_unicode_ci
+    JOIN putusan_kabag 
+        ON putusan_kabag.no_ktp COLLATE utf8mb4_unicode_ci = data_pokok.no_ktp COLLATE utf8mb4_unicode_ci 
+        AND putusan_kabag.id_riwayat = riwayat_kredit.id_riwayat 
+        AND putusan_kabag.id_pegawai COLLATE utf8mb4_unicode_ci = users.id_pegawai COLLATE utf8mb4_unicode_ci
     WHERE riwayat_kredit.id_riwayat = ?
 ");
+
 
 if (!$stmt) {
     die("Query prepare failed: " . $mysqli->error);

@@ -9,9 +9,9 @@ if (!isset($_SESSION['id_pegawai'])) {
 $id_pegawai = $_SESSION['id_pegawai'];
 
 // Siapkan statement dengan INNER JOIN
-$query = "SELECT * 
+$query = "SELECT *
           FROM riwayat_kredit 
-          INNER JOIN data_pokok ON riwayat_kredit.id_pegawai = data_pokok.id_pegawai
+          INNER JOIN data_pokok ON riwayat_kredit.id_pegawai = data_pokok.id_pegawai AND riwayat_kredit.no_ktp = data_pokok.no_ktp
           INNER JOIN users ON riwayat_kredit.id_pegawai = users.id_pegawai
           WHERE data_pokok.id_pegawai = ?";
 

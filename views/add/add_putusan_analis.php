@@ -3,18 +3,18 @@
     <form method="POST" action="../proses/proses_add_putusan_analis.php">
         
         <!-- Hidden Inputs -->
-        <input type="hidden" name="id_pegawai" value="<?php echo htmlspecialchars($dataDeb['id_pegawai']); ?>">
-        <input type="hidden" name="no_ktp" value="<?php echo htmlspecialchars($_GET['no_ktp']); ?>">
-        <input type="hidden" name="id_riwayat" value="<?php echo htmlspecialchars($_GET['id_riwayat']); ?>">
-        <input type="hidden" name="waktu_putus_analis" value="<?php echo (new DateTime())->format('Y-m-d H:i:s'); ?>">
-        <input type="hidden" name="status_putusan_analis" value="Pending">
+        <input type="text" name="id_pegawai" value="<?php echo htmlspecialchars($dataDeb['id_pegawai']); ?>">
+        <input type="text" name="no_ktp" value="<?php echo htmlspecialchars($_GET['no_ktp']); ?>">
+        <input type="text" name="id_riwayat" value="<?php echo htmlspecialchars($_GET['id_riwayat']); ?>">
+        <input type="text" name="waktu_putus_analis" value="<?php echo (new DateTime())->format('Y-m-d H:i:s'); ?>">
+        <input type="text" name="status_putusan_analis" value="Pending">
 
         <?php
             $waktu_approve_kaspem = empty($waktu_approve_kaspem) 
                 ? '0000-00-00 00:00:00' 
                 : (new DateTime())->format('Y-m-d H:i:s');
         ?>
-        <input type="hidden" name="waktu_approve_kaspem" value="0000-00-00 00:00:00">
+        <input type="text" name="waktu_approve_kaspem" value="0000-00-00 00:00:00">
 
         <!-- Card Container -->
         <div class="card mt-3">
@@ -62,5 +62,3 @@
         </div>
     </form>
 </div>
-
-

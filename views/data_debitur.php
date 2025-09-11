@@ -24,7 +24,7 @@ if (isset($_SESSION['id_pegawai'])) {
       <div class="row">
          <div class="card mb-4 w-100">
             <div class="card-header d-flex justify-content-between align-items-center bg-dark text-white">
-               <h5 class="mb-0 text-white">📋 Data Petugas Marketing</h5>
+               <h5 class="mb-0 text-white">📋 Data Debitur</h5>
                <!-- Tombol trigger modal -->
                <?php if (isset($_SESSION['id_role']) && $_SESSION['id_role'] == 13): ?>
                <button type="button" class="btn btn-light btn-sm text-primary" data-toggle="modal" data-target="#modalTambahDebitur">
@@ -35,7 +35,7 @@ if (isset($_SESSION['id_pegawai'])) {
 
             <div class="card-body">
                <div class="table-responsive">
-               <table class="table table-striped table-bordered table-sm" id="dataTables-example" style="width: 105%;">
+               <table class="table table-striped table-bordered table-sm" id="dataTables-example" style="width: 100%;">
     <thead class="table-light text-center">
         <tr>
             <th scope="col">No.</th>

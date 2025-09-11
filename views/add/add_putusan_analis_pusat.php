@@ -14,7 +14,9 @@
                 ? '0000-00-00 00:00:00' 
                 : (new DateTime())->format('Y-m-d H:i:s');
         ?>
-        <input type="hidden" name="waktu_approve_kabag" value="0000-00-00 00:00:00">
+        <input type="hidden" name="waktu_approve_kabag" 
+       value="<?php echo date('Y-m-d\TH:i'); ?>" required>
+
 
         <!-- Card Container -->
         <div class="card mt-3">
@@ -22,7 +24,7 @@
                 <strong>📝 Tambah Dasar Usulan Kasie. Analis Pusat</strong>
             </div>
             <div class="card-body">
-
+        
                 <!-- Form Group: Rekomendasi -->
                 <div class="mb-3">
                     <label for="putusan_analis_pusat" class="form-label">Dasar Usulan Kasie. Analis Pusat</label>

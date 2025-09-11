@@ -7,18 +7,32 @@
                <h5 class="mb-0 text-white">📋 Laporan Kredit</h5>
             </div>
 <div class="card-body">
-  <div class="form-group">
-   <label for="laporanSelect"><strong>Pilih Jenis Laporan:</strong></label>
-   <select class="form-control w-50" id="laporanSelect" onchange="location = this.value;">
-      <option disabled selected>-- Pilih Laporan --</option>
-      <option value="laporan_kredit?id_pegawai=<?php echo $_SESSION['id_pegawai']; ?>">Laporan Kredit</option>
-      <option value="laporan_kredit_harian?id_pegawai=<?php echo $_SESSION['id_pegawai']; ?>">Laporan Kredit Harian</option>
-      <option value="laporan_kredit_bulanan?id_pegawai=<?php echo $_SESSION['id_pegawai']; ?>">Laporan Kredit Bulanan</option>
-      <option value="laporan_kredit_tahunan?id_pegawai=<?php echo $_SESSION['id_pegawai']; ?>">Laporan Kredit Tahunan</option>
-   </select>
+<div class="form-row mb-3">
+   <!-- Dropdown Jenis Laporan -->
+   <div class="form-group col-md-6">
+      <label for="jenisLaporan"><strong>Pilih Jenis Laporan:</strong></label>
+      <select class="form-control" id="jenisLaporan" onchange="location = this.value;">
+         <option disabled selected>-- Pilih Laporan --</option>
+         <option value="laporan_kredit?id_pegawai=<?php echo $_SESSION['id_pegawai']; ?>">Laporan Kredit</option>
+         <option value="laporan_kredit_harian?id_pegawai=<?php echo $_SESSION['id_pegawai']; ?>">Laporan Kredit Harian</option>
+         <option value="laporan_kredit_bulanan?id_pegawai=<?php echo $_SESSION['id_pegawai']; ?>">Laporan Kredit Bulanan</option>
+         <option value="laporan_kredit_tahunan?id_pegawai=<?php echo $_SESSION['id_pegawai']; ?>">Laporan Kredit Tahunan</option>
+      </select>
+   </div>
+
+   <!-- Dropdown Rincian atau Rekap -->
+   <div class="form-group col-md-6">
+      <label for="rincianRekap"><strong>Rincian / Rekap:</strong></label>
+      <select class="form-control" id="rincianRekap" onchange="location = this.value;">
+         <option disabled selected>-- Pilih --</option>
+         <option value="rekap_laporan_kredit?id_pegawai=<?php echo $_SESSION['id_pegawai']; ?>">Rekap Laporan Kredit</option>
+         <option value="laporan_kredit?id_pegawai=<?php echo $_SESSION['id_pegawai']; ?>">Rincian Laporan Kredit</option>
+      </select>
+   </div>
 </div>
+
 <div class="table-responsive">
-   <table class="table table-striped table-bordered table-sm" id="dataTables-example" style="width: 102%;">
+   <table class="table table-striped table-bordered table-sm" id="dataTables-example" style="width: 100%;">
     <thead class="table-light text-center">
         <tr>
             <th scope="col">No.</th>

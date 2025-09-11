@@ -1,8 +1,12 @@
 <?php 
+session_start();
 include "other/header.php"; 
 include("../Database/koneksi.php"); 
 include("../getCode/getLaporanKredit.php"); 
 include("../getCode/getLapKreditApp_harian.php"); 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 $tanggal = isset($_GET['tanggal']) ? $_GET['tanggal'] : date('Y-m-d');
 ?>
@@ -41,7 +45,7 @@ $tanggal = isset($_GET['tanggal']) ? $_GET['tanggal'] : date('Y-m-d');
 
                <!-- Table -->
                <div class="table-responsive">
-                  <table class="table table-striped table-bordered table-sm" id="dataTables-example" style="width: 102%;">
+                  <table class="table table-striped table-bordered table-sm" id="dataTables-example" style="width: 100%;">
                      <thead class="table-light text-center">
                         <tr>
                            <th>No.</th>
@@ -63,28 +67,28 @@ foreach ($getLaporanKredit as $dataRiwayat) {
    $waktu  = "-";
    $tampilkan = false;
 
-   foreach ($getPutusanKaspem as $kaspem) {
-      if ($kaspem['no_ktp'] == $no_ktp && $kaspem['status_putusan_kaspem'] == 'Approved') {
-         $status = "Approved by Pimpinan Cabang";
-         $waktu = $kaspem['waktu_approve_pinca'];
-         $tampilkan = true;
-         break;
+foreach ($getPutusanKaspem as $kaspem) {
+    if ($kaspem['no_ktp'] == $no_ktp && $kaspem['status_putusan_kaspem'] == 'Approved') {
+        $status = "Approved by Pimpinan Cabang";
+        $waktu = $kaspem['waktu_approve_pinca'];
+        $tampilkan = true;
+        break;
       }
    }
 
-   foreach ($getPutusanKabag as $kabag) {
-      if ($kabag['no_ktp'] == $no_ktp && $kabag['status_putusan_kabag'] == 'Approved oleh Kadiv. Pemasaran') {
-         $status = "Approved by Kepala Divisi Pemasaran";
-         $waktu = $kabag['waktu_approve_kadiv'];
-         $tampilkan = true;
-         break;
+foreach ($getPutusanKabag as $kabag) {
+    if ($kabag['no_ktp'] == $no_ktp && $kabag['status_putusan_kabag'] == 'Approved oleh Kadiv. Pemasaran') {
+        $status = "Approved by Kepala Divisi Pemasaran";
+        $waktu = $kabag['waktu_approve_kadiv'];
+        $tampilkan = true;
+        break;
       }
    }
 
-   foreach ($getPutusanKadiv as $kadiv) {
-      if ($kadiv['no_ktp'] == $no_ktp && $kadiv['status_kadiv'] == 'Kredit Disetujui') {
-         $status = "Approved by Direktur Utama";
-         foreach ($getPutusanDirut as $dirut) {
+foreach ($getPutusanKadiv as $kadiv) {
+    if ($kadiv['no_ktp'] == $no_ktp && $kadiv['status_kadiv'] == 'Kredit Disetujui') {
+        $status = "Approved by Direktur Utama";
+        foreach ($getPutusanDirut as $dirut) {
             if ($dirut['no_ktp'] == $no_ktp) {
                $waktu = $dirut['waktu_putus_dirut'];
                $tampilkan = true;

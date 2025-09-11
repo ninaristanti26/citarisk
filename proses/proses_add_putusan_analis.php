@@ -1,6 +1,8 @@
 <?php
 include("../Database/koneksi.php");
-error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+ini_set('display_errors', 1); 
+ini_set('display_startup_errors', 1); 
+error_reporting(E_ALL);
 
 if (isset($_POST['Submit']) && $_POST['Submit'] === "Submit") {
     // Ambil & sanitasi input

@@ -1,6 +1,9 @@
 <?php
 include("../Database/koneksi.php");
-error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 
 if (isset($_POST['Submit']) && $_POST['Submit'] === "Submit") {
     // ✅ Ambil & sanitasi input dari form
@@ -14,7 +17,9 @@ if (isset($_POST['Submit']) && $_POST['Submit'] === "Submit") {
     $jw_rekom_kabag          = trim(htmlspecialchars($_POST['jw_rekom_kabag']));
     $catatan                 = trim(htmlspecialchars($_POST['catatan']));
     $status_putusan_kabag    = trim(htmlspecialchars($_POST['status_putusan_kabag']));
-    $waktu_approve_kadiv     = trim(htmlspecialchars($_POST['waktu_approve_kadiv']));
+    $waktu_approve_kadiv     = trim($_POST['waktu_approve_kadiv']);
+    $waktu_approve_kadiv     = ($waktu_approve_kadiv === '' || $waktu_approve_kadiv === '0000-00-00 00:00:00') ? null : $waktu_approve_kadiv;
+
 
     // ✅ Validasi field wajib
     if (
@@ -50,7 +55,7 @@ if (isset($_POST['Submit']) && $_POST['Submit'] === "Submit") {
     }
 
     $stmt->bind_param(
-        "ssssssssss",
+        "sissssssss",
         $id_pegawai,
         $id_riwayat,
         $no_ktp,

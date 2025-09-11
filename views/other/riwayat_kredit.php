@@ -78,7 +78,7 @@
     </div>
 </div>
 
-<div id="formRiwayatKred it" class="p-3 border rounded mt-3" style="display: none; background-color: #f9f9f9;">
+<div id="formRiwayatKredit" class="p-3 border rounded mt-3" style="display: none; background-color: #f9f9f9;">
     <h5 class="text-primary">➕ Tambah Usulan Pengajuan Kredit</h5>
     <form method="POST" action="../proses/proses_riwayat_kredit.php">
         <input type="hidden" name="update_riwayat_kredit" value="<?php echo (new DateTime())->format('Y-m-d H:i:s'); ?>">

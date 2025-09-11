@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>L E N S</title>
+	<title>CITARISK</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -27,12 +27,12 @@
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
-					<img src="Login_v1/images/2.png" alt="IMG">
+					<img src="Login_v1/images/C.png" alt="IMG">
 				</div>
 
-				<form action="p/proses_login.php" method="post" name="login">
+				<form action="P/proses_login.php" method="post" name="login">
 					<div class="login100-form-title text-center">
-						<span style="display: block; font-size: 24px; font-weight: bold;">Loan Evaluation and Scoring</span>
+						<span style="display: block; font-size: 24px; font-weight: bold;">Credit Analysis and Risk</span>
 						<span style="display: block; font-size: 18px; color: #333;">Perumda BPR Sukabumi</span>
 						<p style="font-size: 16px; color: #666;">Sign in here!</p>
 					</div>

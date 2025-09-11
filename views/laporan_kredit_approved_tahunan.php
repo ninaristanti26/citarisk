@@ -49,7 +49,7 @@ $tahun = $_GET['tahun'] ?? date('Y');
                <p><strong>Periode:</strong> <?php echo $tahun; ?></p>
 
                <div class="table-responsive">
-                  <table class="table table-striped table-bordered table-sm" id="dataTables-example" style="width: 102%;">
+                  <table class="table table-striped table-bordered table-sm" id="dataTables-example" style="width: 100%;">
                      <thead class="text-center table-light">
                         <tr>
                            <th>No.</th>

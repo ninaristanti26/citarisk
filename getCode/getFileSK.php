@@ -1,6 +1,6 @@
 <?php 
 include("../Database/koneksi.php");
-
+error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 $getFileSK = [];
 
 if (isset($_GET['no_ktp']) && isset($_GET['id_riwayat'])) {

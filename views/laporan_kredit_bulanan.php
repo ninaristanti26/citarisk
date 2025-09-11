@@ -30,7 +30,7 @@ if ($stmtBulan = $mysqli->prepare($sqlBulan)) {
 }
 
 // Ambil bulan terpilih
-$bulanTerpilih = isset($_GET['bulan']) ? $_GET['bulan'] : (count($bulanList) ? $bulanList[0] : '');
+
 ?>
 <div class="form-group">
    <label for="laporanSelect"><strong>Pilih Jenis Laporan:</strong></label>
@@ -42,7 +42,9 @@ $bulanTerpilih = isset($_GET['bulan']) ? $_GET['bulan'] : (count($bulanList) ? $
       <option value="laporan_kredit_tahunan?id_pegawai=<?php echo $_SESSION['id_pegawai']; ?>">Laporan Kredit Tahunan</option>
    </select>
 </div>
-<!-- Dropdown Pilih Bulan -->
+
+<div class="form-row mb-6">
+<div class="form-group col-md-6">
 <form method="GET" action="laporan_kredit_bulanan.php" class="form-inline mb-3">
    <input type="hidden" name="id_pegawai" value="<?php echo $id_pegawai; ?>">
    <label class="mr-2" for="bulan"><strong>Pilih Bulan:</strong></label>
@@ -55,7 +57,21 @@ $bulanTerpilih = isset($_GET['bulan']) ? $_GET['bulan'] : (count($bulanList) ? $
       <?php endforeach; ?>
    </select>
 </form>
+</div>
 
+<div class="form-group col-md-6">
+<?php
+    $bulanTerpilih = isset($_GET['bulan']) ? $_GET['bulan'] : (count($bulanList) ? $bulanList[0] : '');
+    $id_pegawai = $_SESSION['id_pegawai'];
+?>  
+<label for="rincianRekap"><strong>Rincian / Rekap:</strong></label>
+    <select class="form-control" id="rincianRekap" onchange="location = this.value;">
+        <option disabled selected>-- Pilih --</option>
+        <option value="rekap_laporan_kredit_bulanan?id_pegawai=<?php echo $id_pegawai; ?>&bulan=<?php echo urlencode($bulanTerpilih); ?>">Rekap Laporan Kredit</option>
+        <option value="laporan_kredit_bulanan?id_pegawai=<?php echo $id_pegawai; ?>&bulan=<?php echo urlencode($bulanTerpilih); ?>">Rincian Laporan Kredit</option>
+    </select>
+</div>
+    
 <!-- Tabel Data -->
 <div class="table-responsive">
    <table class="table table-striped table-bordered table-sm" id="dataTables-example" style="width: 102%;">
@@ -76,9 +92,11 @@ $bulanTerpilih = isset($_GET['bulan']) ? $_GET['bulan'] : (count($bulanList) ? $
         $getLaporanKredit = [];
 
         if ($bulanTerpilih) {
-            $query = "SELECT * FROM riwayat_kredit 
-                      INNER JOIN data_pokok ON riwayat_kredit.id_pegawai = data_pokok.id_pegawai
-                      WHERE riwayat_kredit.id_pegawai = ? 
+            $query = "SELECT DISTINCT riwayat_kredit.*, data_pokok.*
+                      FROM riwayat_kredit 
+                      INNER JOIN data_pokok ON riwayat_kredit.id_pegawai = data_pokok.id_pegawai 
+                            AND riwayat_kredit.no_ktp = data_pokok.no_ktp 
+                      WHERE data_pokok.id_pegawai = ? 
                       AND DATE_FORMAT(update_riwayat_kredit, '%Y-%m') = ?";
 
             if ($stmt = $mysqli->prepare($query)) {
@@ -112,6 +130,6 @@ $bulanTerpilih = isset($_GET['bulan']) ? $_GET['bulan'] : (count($bulanList) ? $
 </div>
 </div>
 </div>
-</div>
+</div></div>
         </div>
 <?php include "other/footer.php"; ?>
