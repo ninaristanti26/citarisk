@@ -17,7 +17,7 @@ include(__DIR__ . '/../../getCode/getRole.php');
 <div class="card-body">
     <div class="table-responsive" align="center">
     <table class="table table-bordered table-striped table-hover" id="dataTables-example" width="100%">
-    <thead class="thead-light text-center">
+    <thead class="thead-light text-center align-middle">
         <tr>
             <th>No.</th>
             <th>Tanggal Input Pengajuan</th>
@@ -25,57 +25,70 @@ include(__DIR__ . '/../../getCode/getRole.php');
             <th>Plafon</th>
             <th>Jangka Waktu</th>
             <th>Tujuan Pengajuan Kredit</th>
-            <th>Aksi</th>
-            <th>Cek Proses</th>
-            <th>Putusan Kredit</th>
+            <th class="text-nowrap">Aksi</th>
         </tr>
     </thead>
-    <tbody>
-            <?php
-            $no = 1;
-            foreach ($getRiwayat_kredit as $dataRiwayat) {
-                $no_ktp_encoded = urlencode($dataRiwayat['no_ktp']);
-                $id_riwayat_encoded = urlencode($dataRiwayat['id_riwayat']);
-                $id_pegawai_encoded = urlencode($dataRiwayat['id_pegawai']);
-                
-                // Format angka dengan number_format
-                $plafon_pengajuan = !empty($dataRiwayat['plafon_pengajuan']) ? number_format($dataRiwayat['plafon_pengajuan'], 0, ',', '.') : '-';
-                $jw_pengajuan     = !empty($dataRiwayat['jw_pengajuan']) ? number_format($dataRiwayat['jw_pengajuan'], 0, ',', '.') : '-';
-                $tujuan_pengajuan = !empty($dataRiwayat['tujuan_pengajuan']) ? htmlspecialchars($dataRiwayat['tujuan_pengajuan']) : '-';
-            ?>
-                <tr class="text-center align-middle">
-            <td><?php echo $no++; ?></td>
-            <td><?php echo htmlspecialchars($dataRiwayat['update_riwayat_kredit'] ?? '-'); ?></td>
-            <td><?php echo htmlspecialchars($dataRiwayat['jenis_kredit'] ?? '-'); ?></td>
-            <td>Rp <?php echo $plafon_pengajuan; ?></td>
-            <td><?php echo $jw_pengajuan; ?> bulan</td>
-            <td><?php echo $tujuan_pengajuan; ?></td>
-            <td>
-                <a href="analisa_konsumtif?no_ktp=<?php echo $no_ktp_encoded; ?>
-                                           &id_riwayat=<?php echo $id_riwayat_encoded; ?>" 
-                   class="btn btn-sm btn-primary">
-                    Lihat Analisa
+    <tbody class="text-center align-middle">
+    <?php
+    $no = 1;
+    foreach ($getRiwayat_kredit as $dataRiwayat):
+        $no_ktp_encoded      = urlencode($dataRiwayat['no_ktp']);
+        $id_riwayat_encoded  = urlencode($dataRiwayat['id_riwayat']);
+        $id_pegawai_encoded  = urlencode($dataRiwayat['id_pegawai']);
+
+        $plafon_pengajuan = !empty($dataRiwayat['plafon_pengajuan']) 
+            ? number_format($dataRiwayat['plafon_pengajuan'], 0, ',', '.') 
+            : '-';
+
+        $jw_pengajuan = !empty($dataRiwayat['jw_pengajuan']) 
+            ? number_format($dataRiwayat['jw_pengajuan'], 0, ',', '.') 
+            : '-';
+
+        $tujuan_pengajuan = !empty($dataRiwayat['tujuan_pengajuan']) 
+            ? htmlspecialchars($dataRiwayat['tujuan_pengajuan']) 
+            : '-';
+    ?>
+    <tr>
+        <td><?php echo $no++; ?></td>
+        <td><?php echo htmlspecialchars($dataRiwayat['update_riwayat_kredit'] ?? '-'); ?></td>
+        <td><?php echo htmlspecialchars($dataRiwayat['jenis_kredit'] ?? '-'); ?></td>
+        <td><?php echo $plafon_pengajuan; ?></td>
+        <td><?php echo $jw_pengajuan; ?> bulan</td>
+        <td><?php echo $tujuan_pengajuan; ?></td>
+        <td>
+            <div class="d-grid gap-1 text-nowrap">
+                <!-- Lihat Analisa -->
+                <a href="analisa_konsumtif?no_ktp=<?php echo $no_ktp_encoded; ?>&id_riwayat=<?php echo $id_riwayat_encoded; ?>" 
+                   class="btn btn-sm btn-primary" title="Lihat Analisa">
+                    📄 Analisa
                 </a>
-            </td>
-            <td>
+                |
+                <!-- Edit Pengajuan (jika pemilik data) -->
+                <?php if ($_SESSION['id_pegawai'] == $dataDeb['id_pegawai']): ?>
+                    <button type="button" class="btn btn-sm btn-warning" onclick="toggleFormEditRiwayatKredit()" title="Edit Pengajuan">
+                        ✏️ Edit Pengajuan
+                    </button>
+                <?php endif; ?>
+                |
+                <!-- Tracking -->
                 <a href="treking?no_ktp=<?php echo $no_ktp_encoded; ?>&id_riwayat=<?php echo $id_riwayat_encoded; ?>" 
-                   class="btn btn-sm btn-danger">
-                    Tracking Kredit
+                   class="btn btn-sm btn-danger" title="Tracking Kredit">
+                    🚚 Tracking
                 </a>
-            </td>
-            <td>
-                <a href="other/cek_putusan_kredit.php?no_ktp=<?php echo urlencode($no_ktp); ?>
-                                                      &id_riwayat=<?php echo $id_riwayat_encoded; ?>
-                                                      &id_pegawai=<?php echo $id_pegawai_encoded; ?>
-                        " 
-                   class="btn btn-sm btn-success">
-                    Putusan Kredit
+                |
+                <!-- Putusan -->
+                <a href="other/cek_putusan_kredit.php?no_ktp=<?php echo $no_ktp_encoded; ?>&id_riwayat=<?php echo $id_riwayat_encoded; ?>&id_pegawai=<?php echo $id_pegawai_encoded; ?>" 
+                   class="btn btn-sm btn-success" title="Lihat Putusan Kredit">
+                    ✅ Putusan
                 </a>
-            </td>
-        </tr>
-            <?php } ?>
-            </tbody>
-        </table>
+            </div>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>
+
+
     </div>
 </div>
 
@@ -121,7 +134,7 @@ include(__DIR__ . '/../../getCode/getRole.php');
         </div>
     </form>
 </div>
-
+<?php include(__DIR__ . '/../edit/edit_riwayat_kredit.php'); ?>
 <script>
 // Toggle form visibility
 function toggleRiwayatKreditForm() {
@@ -136,4 +149,8 @@ document.querySelectorAll('#plafon_pengajuan').forEach(input => {
         this.value = new Intl.NumberFormat('id-ID').format(value);
     });
 });
+function toggleFormEditRiwayatKredit() {
+    const form = document.getElementById('formEditRiwayatKredit');
+    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+}
 </script>
