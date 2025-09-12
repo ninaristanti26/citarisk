@@ -18,15 +18,32 @@
     // Pegawai yang datanya sedang ditampilkan
     $id_pegawai_data = $dataDeb['id_pegawai'] ?? null;
 ?>
-<div class="card-header d-flex justify-content-between align-items-center bg-dark text-white">
-    <h5 class="mb-0 text-white">👩‍❤️‍👨 Data Pasangan</h5>
-    <?php if ($status_kawin == '-' && 
-              $nama_pasangan == '-' &&
-              $tempat == '-' &&
-              $tanggal == '-' &&
-              $id_pegawai_login == $id_pegawai_data): ?>
-    <button type="button" class="btn btn-light btn-sm text-primary" onclick="toggleFormPasangan()">+ Tambah Data</button>
-    <?php endif; ?>
+<div class="card-header bg-dark text-white">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+        <h5 class="mb-2 mb-md-0 text-white">
+            👩‍❤️‍👨 Data Pasangan
+        </h5>
+
+        <div class="d-flex gap-2 flex-wrap">
+            <?php if (
+                $status_kawin == '-' && 
+                $nama_pasangan == '-' &&
+                $tempat == '-' &&
+                $tanggal == '-' &&
+                $id_pegawai_login == $id_pegawai_data
+            ): ?>
+                <button type="button" class="btn btn-light btn-sm text-primary" onclick="toggleFormPasangan()">
+                    + Tambah Data
+                </button>
+            <?php endif; ?>
+
+            <?php if ($_SESSION['id_pegawai'] == $dataDeb['id_pegawai']): ?>
+                <button type="button" class="btn btn-warning btn-sm" onclick="toggleFormEditPasangan()">
+                    ✏️ Edit
+                </button>
+            <?php endif; ?>
+        </div>
+    </div>
 </div>
 
 
@@ -51,7 +68,7 @@
             <td class="text-center">:</td>
             <td class="text-start"><?php echo htmlspecialchars($tempat . ', ' . $tanggal); ?></td>
         </tr>
-        <th class="bg-light text-start" style="width: 300px;">Surat Nikah</th>
+        <th class="bg-light text-start" style="width: 300px;">Surat Nikah/Akta Cerai/Lainnya</th>
             <td class="text-center">:</td>
             <td class="text-start">
             <div class="mt-2">
@@ -62,17 +79,22 @@
                 foreach ($getFileSuratNikah as $fileSuratNikah):
             ?>
                     <strong><?php echo htmlspecialchars($fileSuratNikah['file_name_surat_nikah']); ?></strong><br>
-                    <a class="btn btn-primary btn-sm" href="<?php echo htmlspecialchars($fileSuratNikah['file_path_surat_nikah']); ?>" target="_blank">🔗 Lihat PDF</a> |
-                    <a class="btn btn-danger btn-sm" href="<?php echo htmlspecialchars($fileSuratNikah['file_path_surat_nikah']); ?>" download>⬇️ Download</a>
-                    <div style="margin-top:10px; border: 1px solid #ccc;">
+                    <a class="btn btn-primary btn-sm" href="<?php echo htmlspecialchars($fileSuratNikah['file_path_surat_nikah']); ?>" target="_blank">🔗</a> |
+                    <a class="btn btn-danger btn-sm" href="<?php echo htmlspecialchars($fileSuratNikah['file_path_surat_nikah']); ?>" download>⬇️</a> |
+                    <form method="post" action="../proses/proses_delete_surat_nikah.php" onsubmit="return confirm('Yakin ingin menghapus file ini?');" style="display:inline;">
+                        <input type="hidden" name="id_file_surat_nikah" value="<?php echo $fileSuratNikah['id_file_surat_nikah']; ?>">
+                        <input type="hidden" name="no_ktp" value="<?php echo htmlspecialchars($dataDeb['no_ktp']); ?>">
+                        <button type="submit" class="btn btn-sm btn-warning">🗑️</button>
+                    </form>
+                    <!--<div style="margin-top:10px; border: 1px solid #ccc;">
                         <iframe src="<?php echo htmlspecialchars($fileSuratNikah['file_path_surat_nikah']); ?>" width="50%" height="400px"></iframe>
-                    </div>
+                    </div>-->
             <?php
                 endforeach;
             else:
             ?>
                 <form action="../proses/proses_upload_surat_nikah.php" method="post" enctype="multipart/form-data" class="d-flex align-items-center mb-1 flex-wrap" style="gap: 8px;">
-                    <label for="pdf_sk" class="mb-0">Surat Nikah:</label>
+                    <label for="pdf_sk" class="mb-0">Surat Nikah/Akta Cerai/Lainnya :</label>
                     <input type="hidden" name="no_ktp" value="<?php echo htmlspecialchars($no_ktp); ?>" readonly>
                     <input type="file" name="pdf_surat_nikah" id="pdf_surat_nikah" accept="application/pdf" required>
                     <button class="btn btn-sm btn-primary" type="submit" name="submit">Upload</button>
@@ -88,7 +110,6 @@
         </tr>
     </tbody>
 </table>
-
 </div>
 
 <!-- Form Input - Initially Hidden -->
@@ -129,11 +150,14 @@
         </div>
     </form>
 </div>
-
-<!-- JavaScript Toggle -->
+<?php include(__DIR__ . '/../edit/edit_status_kawin.php'); ?>
 <script>
 function toggleFormPasangan() {
     const form = document.getElementById('formStatusKawin');
+    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+}
+function toggleFormEditPasangan() {
+    const form = document.getElementById('formEditStatusKawin');
     form.style.display = form.style.display === 'none' ? 'block' : 'none';
 }
 </script>
