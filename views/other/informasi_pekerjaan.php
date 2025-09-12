@@ -1,4 +1,8 @@
 <?php
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
     include(__DIR__ . '/../../Database/koneksi.php');
     include(__DIR__ . '/../../getCode/getPekerjaan.php');
     include(__DIR__ . '/../../getCode/getDetail.php');
@@ -41,10 +45,14 @@
               ): ?>
         <button type="button" class="btn btn-light btn-sm text-primary" onclick="toggleFormInfoPekerjaan()">+ Tambah Data</button>
     <?php endif; ?>
+    <?php if ($_SESSION['id_pegawai'] == $dataDeb['id_pegawai']): ?>
+        <button type="button" class="btn btn-warning btn-sm" onclick="toggleFormEditPekerjaan()">
+            ✏️ Edit
+        </button>
+    <?php endif; ?>
 </div>
 
 <div class="table-responsive text-black">
-    
 <table class="table table-bordered table-hover table-sm mb-0">
     <tbody class="text-dark">
         <tr>
@@ -156,9 +164,10 @@
         </div>
 
         <div class="mb-3">
-            <label for="rasio" class="form-label">Rasio Pembiayaan (hanya diisi angka saja tanpa tanda %)</label>
-            <input type="number" class="form-control" name="rasio" id="rasio">
-        </div>
+    <label for="rasio" class="form-label">Rasio Pembiayaan (hanya diisi angka saja tanpa tanda %)</label>
+    <input type="number" class="form-control" name="rasio" id="rasio" min="0" max="100" step="0.01" required oninput="validRasio(this)">
+</div>
+
 
         <div class="d-flex justify-content-end gap-2">
             <input type="submit" name="Submit" value="Submit" class="btn btn-primary">
@@ -166,11 +175,24 @@
         </div>
     </form>
 </div>
+<?php include(__DIR__ . '/../edit/edit_informasi_pekerjaan.php'); ?>
 
 <!-- JavaScript Toggle -->
 <script>
+function validRasio(input) {
+    const value = input.value;
+    if (!/^\d*\.?\d*$/.test(value)) {
+        input.setCustomValidity("Hanya angka saja yang diperbolehkan.");
+    } else {
+        input.setCustomValidity("");
+    }
+}
 function toggleFormInfoPekerjaan() {
     const form = document.getElementById('formInformasiPekerjaan');
+    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+}
+function toggleFormEditPekerjaan() {
+    const form = document.getElementById('formEditPekerjaan');
     form.style.display = form.style.display === 'none' ? 'block' : 'none';
 }
 </script>

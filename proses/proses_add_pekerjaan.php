@@ -26,10 +26,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         empty($tgl_pengangkatan) ||
         empty($usia_akhir_kerja) ||
         empty($alamat_instansi) ||
-        empty($sektor_instansi) ||
-        empty($rasio)
+        empty($sektor_instansi) 
         ) {
         echo "<script>alert('Data tidak lengkap!'); window.history.back();</script>";
+        exit;
+    }
+     if (!is_numeric($rasio)) {
+        echo "<script>alert('Rasio hanya boleh diisi angka!'); window.history.back();</script>";
         exit;
     }
 
