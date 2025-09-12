@@ -4,10 +4,9 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 include($_SERVER['DOCUMENT_ROOT']."/Database/koneksi.php");
 
-if (!isset($_GET['no_ktp'])) {
+if (!isset($no_ktp)) {
     die("Parameter no_ktp tidak ditemukan.");
 }
-$no_ktp = $_GET['no_ktp'];
 
 $stmt = $mysqli->prepare("SELECT *, 
     TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) AS tahun,

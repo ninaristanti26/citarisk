@@ -1,3 +1,15 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+session_start();
+
+// Cek jika akses bukan dari POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['no_ktp'])) {
+    $no_ktp = $_POST['no_ktp'];
+} else {
+    die("Akses tidak valid.");
+}
+?>
 <?php include "other/header.php"; ?>
 <?php
     include(__DIR__ . '/../Database/koneksi.php');

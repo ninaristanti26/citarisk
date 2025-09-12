@@ -1,13 +1,11 @@
 <?php
 session_start();
 
-// Cek login
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header("Location: /login");
+    header("Location: index");
     exit;
 }
 
-// Routing berdasarkan role
 switch ($_SESSION['id_role']) {
     case 13:
         include("home_ao.php");

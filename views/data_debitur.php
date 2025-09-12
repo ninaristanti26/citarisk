@@ -66,9 +66,10 @@ if (isset($_SESSION['id_pegawai'])) {
                 <td class="text-left"><?php echo htmlspecialchars($dataDeb['alamat']); ?></td>
                 <td class="text-left"><?php echo htmlspecialchars($dataDeb['no_hp']); ?></td>
                 <td class="text-center">
-                    <a href="detail?no_ktp=<?php echo $no_ktp_encoded; ?>" class="btn btn-sm btn-primary">
-                        Selengkapnya
-                    </a>
+                    <form method="POST" action="detail">
+                        <input type="hidden" name="no_ktp" value="<?php echo htmlspecialchars($dataDeb['no_ktp']); ?>">
+                        <button type="submit" class="btn btn-sm btn-primary">Selengkapnya</button>
+                    </form>
                 </td>
             </tr>
         <?php } ?>
@@ -103,8 +104,8 @@ if (isset($_SESSION['id_pegawai'])) {
 $(document).ready(function() {
   $('#btnTambahDebitur').click(function() {
     $('#modalTambahDebitur').modal({
-      backdrop: 'static', // klik di luar modal gak nutup modal
-      keyboard: false    // ESC gak nutup modal
+      backdrop: 'static', 
+      keyboard: false    
     });
   });
 });

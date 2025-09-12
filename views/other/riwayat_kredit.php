@@ -2,10 +2,7 @@
 include(__DIR__ . '/../../Database/koneksi.php');
 include(__DIR__ . '/../../getCode/getRiwayat_kredit.php');
 include(__DIR__ . '/../../getCode/getRole.php');
-
- $id_role_login = $_SESSION['id_role'];
-//$id_role_data = $getRole['id_pegawai'] ?? null;
-
+$id_role_login = $_SESSION['id_role'];
 ?>
 <div class="card-header d-flex justify-content-between align-items-center bg-dark text-white">
     <h5 class="mb-0 text-white">📑 Usulan Pengajuan Kredit</h5>
@@ -25,6 +22,8 @@ include(__DIR__ . '/../../getCode/getRole.php');
             <th>Plafon</th>
             <th>Jangka Waktu</th>
             <th>Tujuan Pengajuan Kredit</th>
+            <th>Status</th>
+            <th>Tanggal Approved</th>
             <th class="text-nowrap">Aksi</th>
         </tr>
     </thead>
@@ -47,6 +46,14 @@ include(__DIR__ . '/../../getCode/getRole.php');
         $tujuan_pengajuan = !empty($dataRiwayat['tujuan_pengajuan']) 
             ? htmlspecialchars($dataRiwayat['tujuan_pengajuan']) 
             : '-';
+        
+        $status_rk = !empty($dataRiwayat['status_rk']) 
+            ? htmlspecialchars($dataRiwayat['status_rk']) 
+            : '-';
+        
+        $approved_at = !empty($dataRiwayat['approved_at']) 
+            ? htmlspecialchars($dataRiwayat['approved_at']) 
+            : '-';
     ?>
     <tr>
         <td><?php echo $no++; ?></td>
@@ -55,16 +62,23 @@ include(__DIR__ . '/../../getCode/getRole.php');
         <td><?php echo $plafon_pengajuan; ?></td>
         <td><?php echo $jw_pengajuan; ?> bulan</td>
         <td><?php echo $tujuan_pengajuan; ?></td>
+        <td><span class="badge bg-secondary"><?php echo $status_rk; ?></span></td>
+        <td><?php echo $approved_at; ?></td>
         <td>
             <div class="d-grid gap-1 text-nowrap">
                 <!-- Lihat Analisa -->
-                <a href="analisa_konsumtif?no_ktp=<?php echo $no_ktp_encoded; ?>&id_riwayat=<?php echo $id_riwayat_encoded; ?>" 
+                  <form method="POST" action="analisa_konsumtif">
+                        <input type="hidden" name="no_ktp" value="<?php echo htmlspecialchars($dataRiwayat['no_ktp']); ?>">
+                        <input type="hidden" name="id_riwayat" value="<?php echo htmlspecialchars($dataRiwayat['id_riwayat']); ?>">
+                        <button type="submit" class="btn btn-sm btn-primary">📄 Analisa</button>
+                    </form>
+                <!--<a href="analisa_konsumtif?no_ktp=<?php echo $no_ktp_encoded; ?>&id_riwayat=<?php echo $id_riwayat_encoded; ?>" 
                    class="btn btn-sm btn-primary" title="Lihat Analisa">
                     📄 Analisa
-                </a>
+                </a>-->
                 |
                 <!-- Edit Pengajuan (jika pemilik data) -->
-                <?php if ($_SESSION['id_pegawai'] == $dataDeb['id_pegawai']): ?>
+                <?php if ($_SESSION['id_pegawai'] == $dataDeb['id_pegawai'] && $status_rk === 'Pengajuan'): ?>
                     <button type="button" class="btn btn-sm btn-warning" onclick="toggleFormEditRiwayatKredit()" title="Edit Pengajuan">
                         ✏️ Edit Pengajuan
                     </button>
@@ -127,6 +141,13 @@ include(__DIR__ . '/../../getCode/getRole.php');
             <label for="tujuan_pengajuan">Tujuan Pengajuan Kredit</label>
             <input type="text" class="form-control" name="tujuan_pengajuan" id="tujuan_pengajuan" required>
         </div>
+        <input type="hidden" name="status" value="Pending">
+        <?php
+            $approved_at = empty($approved_at) 
+                ? '0000-00-00 00:00:00' 
+                : (new DateTime())->format('Y-m-d H:i:s');
+        ?>
+        <input type="hidden" name="approved_at" value="0000-00-00 00:00:00">
 
         <div class="d-flex justify-content-end gap-2">
             <input type="submit" name="Submit" value="Submit" class="btn btn-primary">

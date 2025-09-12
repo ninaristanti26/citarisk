@@ -1,10 +1,12 @@
 <?php 
-include(__DIR__ . '/../Database/koneksi.php');
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+include($_SERVER['DOCUMENT_ROOT']."/Database/koneksi.php");
 
-$no_ktp     = $mysqli->real_escape_string($_GET['no_ktp']);
-$id_riwayat = $mysqli->real_escape_string($_GET['id_riwayat']); 
-
-// Ambil semua data bank lain untuk no_ktp
+if (!isset($no_ktp)) {
+    die("Parameter no_ktp tidak ditemukan.");
+}
 $query = "SELECT bank_lain.*, data_pokok.nama_debitur
           FROM bank_lain
           INNER JOIN data_pokok ON bank_lain.no_ktp = data_pokok.no_ktp

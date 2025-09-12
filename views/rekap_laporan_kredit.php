@@ -39,8 +39,8 @@ include "other/header.php";
    <table class="table table-bordered table-striped table-sm w-100">
     <tbody>
         <?php
-        include("../Database/koneksi.php");
-        include("../getCode/getRekapLaporanKredit.php");
+        include(__DIR__ . '/../Database/koneksi.php');
+        include(__DIR__ . '/../getCode/getRekapLaporanKredit.php');
         ?>
         <?php if (!empty($getRekapLaporanKredit)): ?>
         <?php foreach ($getRekapLaporanKredit as $dataLapKredit): ?>
