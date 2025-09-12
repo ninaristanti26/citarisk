@@ -6,7 +6,7 @@ $getFile = [];
 if (isset($_GET['no_ktp'])) {
     $no_ktp = $_GET['no_ktp'];
 
-    $query = "SELECT file.file_name, file.file_path 
+    $query = "SELECT file.id_file, file.file_name, file.file_path 
               FROM file, data_pokok
               WHERE file.no_ktp=data_pokok.no_ktp
               AND file.no_ktp = ?";
