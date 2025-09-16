@@ -7,9 +7,7 @@
           <h5 class="mb-0 text-white">📋 Rekap Laporan Kredit Harian</h5>
         </div>
         <div class="card-body">
-
-          <!-- Dropdown Pilih Jenis Laporan -->
-          <div class="form-group mb-4">
+        <div class="form-group mb-4">
             <label for="laporanSelect"><strong>Pilih Jenis Laporan:</strong></label>
             <select class="form-control w-50" id="laporanSelect" onchange="location = this.value;">
               <option disabled selected>-- Pilih Laporan --</option>
@@ -20,7 +18,6 @@
             </select>
           </div>
 
-          <!-- Form Pilih Tanggal & Dropdown Rincian / Rekap -->
           <div class="form-row mb-4">
             <div class="col-md-6">
               <form method="GET" action="rekap_laporan_kredit_harian.php" class="form-inline">

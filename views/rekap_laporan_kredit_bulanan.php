@@ -8,52 +8,58 @@
         </div>
         <div class="card-body">
 
-          <!-- Dropdown Pilih Jenis Laporan -->
-          <div class="form-group mb-4">
-            <label for="laporanSelect"><strong>Pilih Jenis Laporan:</strong></label>
-            <select class="form-control w-50" id="laporanSelect" onchange="location = this.value;">
-              <option disabled selected>-- Pilih Laporan --</option>
-              <option value="laporan_kredit?id_pegawai=<?php echo $_SESSION['id_pegawai']; ?>">Laporan Kredit</option>
-              <option value="laporan_kredit_harian?id_pegawai=<?php echo $_SESSION['id_pegawai']; ?>">Laporan Kredit Harian</option>
-              <option value="laporan_kredit_bulanan?id_pegawai=<?php echo $_SESSION['id_pegawai']; ?>">Laporan Kredit Bulanan</option>
-              <option value="laporan_kredit_tahunan?id_pegawai=<?php echo $_SESSION['id_pegawai']; ?>">Laporan Kredit Tahunan</option>
-            </select>
-          </div>
+          <div class="row mb-4">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="laporanSelect"><strong>Jenis Laporan:</strong></label>
+                <select class="form-control" id="laporanSelect" onchange="location = this.value;">
+                  <option disabled selected>-- Pilih Laporan --</option>
+                  <option value="laporan_kredit?id_pegawai=<?= $_SESSION['id_pegawai']; ?>">Laporan Kredit</option>
+                  <option value="laporan_kredit_harian?id_pegawai=<?= $_SESSION['id_pegawai']; ?>">Laporan Kredit Harian</option>
+                  <option value="laporan_kredit_bulanan?id_pegawai=<?= $_SESSION['id_pegawai']; ?>">Laporan Kredit Bulanan</option>
+                  <option value="laporan_kredit_tahunan?id_pegawai=<?= $_SESSION['id_pegawai']; ?>">Laporan Kredit Tahunan</option>
+                </select>
+              </div>
+            </div>
 
           <?php
             $id_pegawai = $_SESSION['id_pegawai'];
             $bulanTerpilih = isset($_GET['bulan']) ? $_GET['bulan'] : (count($bulanList) ? $bulanList[0] : '');
           ?>
 
-          <div class="form-row mb-4">
-            <div class="col-md-6">
-              <form method="GET" action="rekap_laporan_kredit_bulanan.php" class="form-inline">
-                <input type="hidden" name="id_pegawai" value="<?php echo $id_pegawai; ?>">
-                <label class="mr-2" for="bulan"><strong>Pilih Bulan:</strong></label>
-                <select name="bulan" id="bulan" class="form-control mr-2" onchange="this.form.submit()" required>
+          <!-- Filter Bulan dan Mode Laporan -->
+          <div class="col-md-4">
+            <form method="GET" action="rekap_laporan_kredit_bulanan.php">
+              <input type="hidden" name="id_pegawai" value="<?= $id_pegawai; ?>">
+              <div class="form-group">
+                <label for="bulan"><strong>Bulan:</strong></label>
+                <select name="bulan" id="bulan" class="form-control" onchange="this.form.submit()" required>
                   <option disabled selected>-- Pilih Bulan --</option>
                   <?php foreach ($bulanList as $bulan): ?>
-                    <option value="<?php echo $bulan; ?>" <?php echo ($bulan == $bulanTerpilih ? 'selected' : ''); ?>>
-                      <?php echo date('F Y', strtotime($bulan . '-01')); ?>
-                    </option>
+                  <option value="<?= $bulan; ?>" <?= ($bulan == $bulanTerpilih ? 'selected' : ''); ?>>
+                  <?= date('F Y', strtotime($bulan . '-01')); ?>
+                  </option>
                   <?php endforeach; ?>
                 </select>
-              </form>
-            </div>
-
-            <div class="col-md-6">
-              <label for="rincianRekap"><strong>Rincian / Rekap:</strong></label>
-              <select class="form-control" id="rincianRekap" onchange="location = this.value;">
-                <option disabled selected>-- Pilih --</option>
-                <option value="rekap_laporan_kredit_bulanan?id_pegawai=<?php echo $id_pegawai; ?>&bulan=<?php echo urlencode($bulanTerpilih); ?>">Rekap Laporan Kredit</option>
-                <option value="laporan_kredit_bulanan?id_pegawai=<?php echo $id_pegawai; ?>&bulan=<?php echo urlencode($bulanTerpilih); ?>">Rincian Laporan Kredit</option>
-              </select>
-            </div>
+              </div>
+            </form>
           </div>
+
+          <div class="col-md-4">
+          <div class="form-group">
+            <label for="rincianRekap"><strong>Tipe Laporan :</strong></label>
+            <select class="form-control" id="rincianRekap" onchange="location = this.value;">
+              <option disabled selected>-- Pilih --</option>
+              <option value="rekap_laporan_kredit_bulanan?id_pegawai=<?= $id_pegawai; ?>&bulan=<?= urlencode($bulanTerpilih); ?>">Rekap Laporan Kredit</option>
+              <option value="laporan_kredit_bulanan?id_pegawai=<?= $id_pegawai; ?>&bulan=<?= urlencode($bulanTerpilih); ?>">Rincian Laporan Kredit</option>
+            </select>
+          </div>
+        </div>
+      </div>
 
           <?php if (!empty($bulanTerpilih)): ?>
             <?php
-              include("../Database/koneksi.php");
+              include(__DIR__ . '/../Database/koneksi.php');
 
               $query = "SELECT users.id_pegawai, users.nama,  
                           COUNT(riwayat_kredit.plafon_pengajuan) AS noa, 
@@ -76,31 +82,31 @@
               }
             ?>
 
-            <div class="table-responsive">
-              <h5 class="mb-3"><strong>Rekap Data Kredit Bulan: <?php echo date('F Y', strtotime($bulanTerpilih . '-01')); ?></strong></h5>
-              <table class="table table-bordered table-striped table-sm w-100">
+            <div class="table-responsive mt-4">
+              <h5><strong>Rekap Data Kredit Bulan: <?= date('F Y', strtotime($bulanTerpilih . '-01')); ?></strong></h5>
+              <table class="table table-bordered table-striped table-hover w-100 mt-3">
                 <tbody>
                   <?php if (!empty($getRekapLaporanKredit)): ?>
                     <?php foreach ($getRekapLaporanKredit as $dataLapKredit): ?>
                       <tr>
                         <th style="width: 30%;">ID</th>
                         <td style="width: 5%;" class="text-center">:</td>
-                        <td><?php echo htmlspecialchars($dataLapKredit['id_pegawai']); ?></td>
+                        <td><?= htmlspecialchars($dataLapKredit['id_pegawai']); ?></td>
                       </tr>
                       <tr>
                         <th>Nama Petugas Marketing</th>
                         <td class="text-center">:</td>
-                        <td><?php echo htmlspecialchars($dataLapKredit['nama']); ?></td>
+                        <td><?= htmlspecialchars($dataLapKredit['nama']); ?></td>
                       </tr>
                       <tr>
-                        <th>NOA Debitur Yang Diajukan</th>
+                        <th>NOA Debitur yang Diajukan</th>
                         <td class="text-center">:</td>
-                        <td><?php echo htmlspecialchars($dataLapKredit['noa']); ?></td>
+                        <td><strong><?= htmlspecialchars($dataLapKredit['noa']); ?></strong></td>
                       </tr>
                       <tr>
                         <th>Jumlah Plafon Pengajuan</th>
                         <td class="text-center">:</td>
-                        <td><?php echo number_format($dataLapKredit['plafon_pengajuan'], 0, ',', '.'); ?></td>
+                        <td><strong>Rp <?= number_format($dataLapKredit['plafon_pengajuan'], 0, ',', '.'); ?></strong></td>
                       </tr>
                     <?php endforeach; ?>
                   <?php else: ?>
@@ -112,7 +118,7 @@
               </table>
             </div>
           <?php else: ?>
-            <div class="alert alert-info mt-3" role="alert">
+            <div class="alert alert-info mt-4" role="alert">
               Silakan pilih bulan terlebih dahulu untuk menampilkan rekap laporan kredit bulanan.
             </div>
           <?php endif; ?>

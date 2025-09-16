@@ -9,64 +9,64 @@
         <div class="card-body">
 
           <?php
-          include("../Database/koneksi.php");
+  include(__DIR__ . '/../Database/koneksi.php');
+  $id_pegawai = $_SESSION['id_pegawai'];
 
-          $id_pegawai = $_SESSION['id_pegawai'];
+  // Ambil daftar tahun
+  $tahunList = [];
+  $sqlTahun = "SELECT DISTINCT YEAR(update_riwayat_kredit) AS tahun 
+               FROM riwayat_kredit 
+               WHERE id_pegawai = ? 
+               ORDER BY tahun DESC";
+  if ($stmtTahun = $mysqli->prepare($sqlTahun)) {
+      $stmtTahun->bind_param("s", $id_pegawai);
+      $stmtTahun->execute();
+      $resultTahun = $stmtTahun->get_result();
+      while ($row = $resultTahun->fetch_assoc()) {
+          $tahunList[] = $row['tahun'];
+      }
+      $stmtTahun->close();
+  }
 
-          // Ambil daftar tahun
-          $tahunList = [];
-          $sqlTahun = "SELECT DISTINCT YEAR(update_riwayat_kredit) AS tahun 
-                       FROM riwayat_kredit 
-                       WHERE id_pegawai = ? 
-                       ORDER BY tahun DESC";
-          if ($stmtTahun = $mysqli->prepare($sqlTahun)) {
-              $stmtTahun->bind_param("s", $id_pegawai);
-              $stmtTahun->execute();
-              $resultTahun = $stmtTahun->get_result();
-              while ($row = $resultTahun->fetch_assoc()) {
-                  $tahunList[] = $row['tahun'];
-              }
-              $stmtTahun->close();
-          }
-
+  $tahunTerpilih = $_GET['tahun'] ?? (count($tahunList) ? $tahunList[0] : '');
+?>
           
-          ?>
-          
-          <div class="form-group">
-            <label for="laporanSelect"><strong>Pilih Jenis Laporan:</strong></label>
-            <select class="form-control w-50" id="laporanSelect" onchange="location = this.value;">
-              <option disabled selected>-- Pilih Laporan --</option>
-              <option value="laporan_kredit?id_pegawai=<?php echo $id_pegawai; ?>">Laporan Kredit</option>
-              <option value="laporan_kredit_harian?id_pegawai=<?php echo $id_pegawai; ?>">Laporan Kredit Harian</option>
-              <option value="laporan_kredit_bulanan?id_pegawai=<?php echo $id_pegawai; ?>">Laporan Kredit Bulanan</option>
-              <option value="laporan_kredit_tahunan?id_pegawai=<?php echo $id_pegawai; ?>">Laporan Kredit Tahunan</option>
-            </select>
-          </div>
-
-          <form method="GET" action="laporan_kredit_tahunan.php" class="form-inline mb-3">
-            <input type="hidden" name="id_pegawai" value="<?php echo $id_pegawai; ?>">
-            <label class="mr-2" for="tahun"><strong>Pilih Tahun:</strong></label>
-            <select name="tahun" id="tahun" class="form-control mr-2" onchange="this.form.submit()" required>
-              <option disabled selected>-- Pilih Tahun --</option>
-              <?php foreach ($tahunList as $tahun): ?>
-                <option value="<?php echo $tahun; ?>" <?php echo ($tahun == $tahunTerpilih ? 'selected' : ''); ?>>
-                  <?php echo $tahun; ?>
-                </option>
-              <?php endforeach; ?>
-            </select>
-          </form>
-
-            <div class="form-group col-md-6">
-<?php
-    $tahunTerpilih = isset($_GET['tahun']) ? $_GET['tahun'] : (count($tahunList) ? $tahunList[0] : '');
-    $id_pegawai = $_SESSION['id_pegawai'];
-?>  
-<label for="rincianRekap"><strong>Rincian / Rekap:</strong></label>
-    <select class="form-control" id="rincianRekap" onchange="location = this.value;">
-        <option disabled selected>-- Pilih --</option>
-        <option value="rekap_laporan_kredit_tahunan?id_pegawai=<?php echo $id_pegawai; ?>&tahun=<?php echo urlencode($tahunTerpilih); ?>">Rekap Laporan Kredit</option>
-        <option value="laporan_kredit_tahunan?id_pegawai=<?php echo $id_pegawai; ?>&tahun=<?php echo urlencode($tahunTerpilih); ?>">Rincian Laporan Kredit</option>
+          <div class="row mb-4">
+  <!-- Jenis Laporan -->
+  <div class="col-md-4 mb-3">
+    <label for="laporanSelect"><strong>Jenis Laporan:</strong></label>
+    <select class="form-control" id="laporanSelect" onchange="location = this.value;">
+      <option disabled selected>-- Pilih Laporan --</option>
+      <option value="laporan_kredit?id_pegawai=<?= $id_pegawai; ?>">Laporan Kredit</option>
+      <option value="laporan_kredit_harian?id_pegawai=<?= $id_pegawai; ?>">Laporan Kredit Harian</option>
+      <option value="laporan_kredit_bulanan?id_pegawai=<?= $id_pegawai; ?>">Laporan Kredit Bulanan</option>
+      <option value="laporan_kredit_tahunan?id_pegawai=<?= $id_pegawai; ?>">Laporan Kredit Tahunan</option>
     </select>
+  </div>
+
+          <div class="col-md-4 mb-3">
+    <form method="GET" action="laporan_kredit_tahunan.php">
+      <input type="hidden" name="id_pegawai" value="<?= $id_pegawai; ?>">
+      <label for="tahun"><strong>Pilih Tahun:</strong></label>
+      <select name="tahun" id="tahun" class="form-control" onchange="this.form.submit()" required>
+        <option disabled selected>-- Pilih Tahun --</option>
+        <?php foreach ($tahunList as $tahun): ?>
+          <option value="<?= $tahun; ?>" <?= ($tahun == $tahunTerpilih ? 'selected' : ''); ?>>
+            <?= $tahun; ?>
+          </option>
+        <?php endforeach; ?>
+      </select>
+    </form>
+  </div>
+
+           <div class="col-md-4 mb-3">
+    <label for="rincianRekap"><strong>Rincian / Rekap:</strong></label>
+    <select class="form-control" id="rincianRekap" onchange="location = this.value;">
+      <option disabled selected>-- Pilih --</option>
+      <option value="rekap_laporan_kredit_tahunan?id_pegawai=<?= $id_pegawai; ?>&tahun=<?= urlencode($tahunTerpilih); ?>">Rekap Laporan Kredit</option>
+      <option value="laporan_kredit_tahunan?id_pegawai=<?= $id_pegawai; ?>&tahun=<?= urlencode($tahunTerpilih); ?>">Rincian Laporan Kredit</option>
+    </select>
+  </div>
 </div>
           
           <div class="table-responsive">
