@@ -7,9 +7,9 @@
                <h5 class="mb-0 text-white">📋 Laporan Kredit Approved</h5>
             </div>
 <div class="card-body">
-<div class="form-row mb-3">
-    
-<div class="form-group col-md-6">
+  
+<div class="row mb-6">
+   <div class="col-md-6 mb-3">
    <label for="laporanSelect"><strong>Pilih Jenis Laporan:</strong></label>
    <select class="form-control w-50" id="laporanSelect" onchange="location = this.value;">
       <option disabled selected>-- Pilih Laporan --</option>
@@ -20,7 +20,7 @@
    </select>
 </div>
    
-<div class="form-group col-md-6">
+<div class="col-md-6 mb-3">
     <label for="rincianRekap"><strong>Rincian / Rekap:</strong></label>
       <select class="form-control" id="rincianRekap" onchange="location = this.value;">
          <option disabled selected>-- Pilih --</option>

@@ -1,9 +1,9 @@
 <?php 
 session_start();
 include "other/header.php"; 
-include("../Database/koneksi.php"); 
-include("../getCode/getLaporanKredit.php"); 
-include("../getCode/getLapKreditApp_harian.php"); 
+include(__DIR__ . '/../Database/koneksi.php');
+include(__DIR__ . '/../getCode/getLaporanKredit.php');
+include(__DIR__ . '/../getCode/getLapKreditApp_harian.php');
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);

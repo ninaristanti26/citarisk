@@ -1,8 +1,8 @@
 <?php 
 include "other/header.php"; 
-include("../Database/koneksi.php"); 
-include("../getCode/getLaporanKredit.php"); 
-include("../getCode/getLapKreditApp_bulanan.php");
+include(__DIR__ . '/../Database/koneksi.php');
+include(__DIR__ . '/../getCode/getLaporanKredit.php');
+include(__DIR__ . '/../getCode/getLapKreditApp_bulanan.php');
 
 $tahun = $_GET['tahun'] ?? date('Y');
 ?>

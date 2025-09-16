@@ -36,9 +36,9 @@
                      </thead>
                      <tbody>
                      <?php
-                        include("../Database/koneksi.php");
-                        include("../getCode/getLaporanKredit.php");
-                        include("../getCode/getLapKreditApp.php");
+                        include(__DIR__ . '/../Database/koneksi.php');
+                        include(__DIR__ . '/../getCode/getLaporanKredit.php');
+                        include(__DIR__ . '/../getCode/getLapKreditApp.php');
                         $no = 1;
                         $adaData = false;
 
